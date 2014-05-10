@@ -9,10 +9,10 @@ abstract class AbstractSimplyHiredJobAMaticApi {
         $class_vars = get_object_vars($this);
         $properties = array();
         foreach ($class_vars as $key => $val) {
-            if(is_string($val)){
+            if(!is_object($val)){
                 $properties[$key] = $val;
-            } elseif(($val instanceof SimplyHiredJobAMaticApi_JobsCollection)){
-                $properties['jobs'] = $val->toArray();
+            } elseif(method_exists($val,'toArray')){
+                $properties[$key] = $val->toArray();
             }
         }
         return $properties;

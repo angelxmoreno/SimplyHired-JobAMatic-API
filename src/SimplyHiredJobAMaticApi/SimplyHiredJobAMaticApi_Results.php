@@ -1,6 +1,7 @@
 <?php
 class SimplyHiredJobAMaticApi_Results extends AbstractSimplyHiredJobAMaticApi {
 
+    protected $search_settings;
     protected $request_url;
     protected $request_title;
     protected $request_time;
@@ -10,7 +11,8 @@ class SimplyHiredJobAMaticApi_Results extends AbstractSimplyHiredJobAMaticApi {
     protected $total_viewable_results;
     protected $jobs_collection;
 
-    function __construct(SimpleXMLElement $xml_response) {
+    function __construct(SimpleXMLElement $xml_response, SimplyHiredJobAMaticApi $search_settings) {
+        $this->search_settings = $search_settings->toArray();
         $this->request_url = (string) $xml_response->rq['url'];
         $this->request_title = (string) $xml_response->rq->t;
         $this->request_time = $this->parseDate($xml_response->rq->dt);
@@ -19,8 +21,6 @@ class SimplyHiredJobAMaticApi_Results extends AbstractSimplyHiredJobAMaticApi {
         $this->total_results = (int) $xml_response->rq->tr;
         $this->total_viewable_results = (int) $xml_response->rq->tv;
         $results_set = $xml_response->rs->r;
-        //print_r($results_set);
-        //die;
         $this->jobs_collection = new SimplyHiredJobAMaticApi_JobsCollection();
         foreach ($results_set as $job_xml) {
             $this->jobs_collection->add($job_xml);

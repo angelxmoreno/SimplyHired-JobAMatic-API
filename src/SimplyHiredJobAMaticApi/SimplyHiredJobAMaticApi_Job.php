@@ -33,12 +33,13 @@ class SimplyHiredJobAMaticApi_Job extends AbstractSimplyHiredJobAMaticApi {
             case 'sponsored':
                 $this->is_sponsored = true;
                 break;
+            case 'organic':
+                $this->is_organic = true;
+                break;    
             default:
                 die("\n wtf is '{$this->type}' for '{$this->title}'");
         }
-        $this->is_paid = (string) $xml_response->xxx;
-        $this->is_sponsored = (string) $xml_response->xxx;
-        $this->is_organic = (string) $xml_response->xxx;
+
         $this->location = (string) $xml_response->loc;
         $this->city = (string) $xml_response->loc['cty'];
         $this->state = (string) $xml_response->loc['st'];
