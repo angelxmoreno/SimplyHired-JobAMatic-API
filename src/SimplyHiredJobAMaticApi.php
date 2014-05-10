@@ -131,6 +131,11 @@ class SimplyHiredJobAMaticApi {
         return $this;
     }
 
+    public function setFragmentDescription($clip_description = 0){
+        $this->description_fragment = (int)$clip_description;
+        return $this;
+    }
+
     public function request(){
         $url = $this->_buildUrl();
         $raw_response = $this->http->get($url);
