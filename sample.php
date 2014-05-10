@@ -35,7 +35,7 @@ $jobResults2 = $JobAMaticApi2
 	->setQuery('Wordpress')
 	->setLocation('10001')
 	->setLocationExact()
-	->setSortByLastSeenDate('desc')
+	->setSortByRelevance()
 	->setWindowSize(100)
 	->setFragmentDescription(true)
 	->request();
