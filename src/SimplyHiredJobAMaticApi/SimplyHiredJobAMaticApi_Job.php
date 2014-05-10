@@ -37,7 +37,7 @@ class SimplyHiredJobAMaticApi_Job extends AbstractSimplyHiredJobAMaticApi {
                 $this->is_organic = true;
                 break;    
             default:
-                die("\n wtf is '{$this->type}' for '{$this->title}'");
+                die("\n unknown type: '{$this->type}' for '{$this->title}'");
         }
 
         $this->location = (string) $xml_response->loc;
