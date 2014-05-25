@@ -187,7 +187,7 @@ class SimplyHiredJobAMaticApi {
      * @return \SimplyHiredJobAMaticApi
      */
     public function setLocationExact() {
-        $this->search_settings['miles'] = 'mi-exact';
+        $this->search_settings['miles'] = 'exact';
         return $this;
     }
 
