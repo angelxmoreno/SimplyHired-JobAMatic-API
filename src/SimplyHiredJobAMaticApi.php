@@ -60,7 +60,7 @@ class SimplyHiredJobAMaticApi {
      * 
      * @var string 
      */
-    protected $description_fragment = '0';
+    protected $description_fragment = false;
 
     /**
      * A lookup array for mapping search variables to their corresponding
@@ -351,7 +351,7 @@ class SimplyHiredJobAMaticApi {
      * @return \SimplyHiredJobAMaticApi
      */
     public function setFragmentDescription($clip_description = 0) {
-        $this->description_fragment = (int) $clip_description;
+        $this->description_fragment = (boolean) $clip_description;
         return $this;
     }
 
@@ -405,10 +405,12 @@ class SimplyHiredJobAMaticApi {
             'jbd' => $this->domain,
             'ssty' => $this->search_style,
             'cflg' => $this->configuration_flag,
+            'frag' => ($this->description_fragment) ? 1 : 'false',
             'clip' => $this->_getRemoteIp(),
         );
 
         $url = $this->end_point . $this->_buildSearchPath() . '?' . http_build_query($get_params);
+        debug($url);
         return $url;
     }
 
