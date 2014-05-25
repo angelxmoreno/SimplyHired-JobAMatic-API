@@ -410,7 +410,6 @@ class SimplyHiredJobAMaticApi {
         );
 
         $url = $this->end_point . $this->_buildSearchPath() . '?' . http_build_query($get_params);
-        debug($url);
         return $url;
     }
 
