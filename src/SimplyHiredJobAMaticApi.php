@@ -354,6 +354,37 @@ class SimplyHiredJobAMaticApi {
         $this->description_fragment = (boolean) $clip_description;
         return $this;
     }
+    
+    /**
+     * Sets the Client IP Address
+     * 
+     * An optional value, but it is strongly advised. If not passed we use the 
+     * server IP ( if running on a web server ) or the machine's IP ( if running
+     * via commandline
+     * 
+     * @param string $client_ip
+     * @return \SimplyHiredJobAMaticApi
+     */
+    public function setClientIp($client_ip) {
+        $this->client_ip = $client_ip;
+        return $this;
+    }
+    
+    /**
+     * Gets the Client IP Address
+     * 
+     * Will use $this->client_ip if set otherwise will attempt to get local IP
+     * 
+     * @param string $client_ip
+     * @return void
+     */
+    protected function _getClientIp() {
+        if($this->client_ip){
+            return $this->client_ip;
+        } else {
+            $this->_getRemoteIp();
+        }
+    }
 
     /**
      * Performs the request
@@ -406,7 +437,7 @@ class SimplyHiredJobAMaticApi {
             'ssty' => $this->search_style,
             'cflg' => $this->configuration_flag,
             'frag' => ($this->description_fragment) ? 1 : 'false',
-            'clip' => $this->_getRemoteIp(),
+            'clip' => $this->_getClientIp(),
         );
 
         $url = $this->end_point . $this->_buildSearchPath() . '?' . http_build_query($get_params);
